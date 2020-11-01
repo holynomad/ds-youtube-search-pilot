@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  var API_KEY = ""
+  var API_KEY = "Your API Key"
   var video = ""
   var videos = $("#videos")
 
@@ -9,7 +9,7 @@ $(document).ready(function(){
 
     var search = $("#search").val();
 
-    videoSearch(API_KEY, search, 6);
+    videoSearch(API_KEY, search, 50);
   })
   
 
@@ -24,6 +24,7 @@ $(document).ready(function(){
       data.items.forEach(item => {
         video = `
           <iframe src="https://www.youtube.com/embed/${item.id.videoId}" height="315" width="420" frameboarder="0" allowfullscreen></iframe>
+
         `
 
         $("#videos").append(video)
