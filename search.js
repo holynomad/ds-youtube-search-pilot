@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  var API_KEY = "Your API Key"
+  var API_KEY = ""
   var video = ""
   var videos = $("#videos")
 
@@ -24,7 +24,11 @@ $(document).ready(function(){
       data.items.forEach(item => {
         video = `
           <iframe src="https://www.youtube.com/embed/${item.id.videoId}" height="315" width="420" frameboarder="0" allowfullscreen></iframe>
-
+          <h6>채널ID : ${item.snippet.channelId}</h6>
+          <h6>채널명 : ${item.snippet.channelTitle}</h6>
+          <h6>제목 : ${item.snippet.title}</h6>
+          <h6>Desc. : ${item.snippet.description}</h6>
+          <h6>게시일시 : ${item.snippet.publishedAt}</h6>
         `
 
         $("#videos").append(video)
