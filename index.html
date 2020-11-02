@@ -8,7 +8,7 @@
   <body>
     <div class="container">
       <br>
-      <h1>다샤 Youtube Search (Pilot ver.)</h1>
+      <h1>다샤 Youtube Search (Pilot ver1.2)</h1>
       <br>
       <form id="form">
         <div class="form-group">
@@ -16,20 +16,31 @@
         </div>
         <div class="form-group">
           <input type="submit" class="btn btn-danger" value="search">
+        </div>       
+      </form>
+    </div>
+  
+    <div class="container">
+      <form id="channelInfo">
+        <div class="form-group">
+          <!--<input type="text" class="form-control" id="totalResults">-->
+          <div id="totalResults">
+           
+          </div>
+        </div>
+        <div class="form-group">
+          <!--<input type="text" class="form-control" id="nextPageToken">-->
+          <input type="text" class="form-control" id="nextPageToken">
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btn btn-danger" value="next-page">
         </div>
       </form>
     </div>
-
     <br>
-    <br>
-    <br>
-
     <div class="row">
       <div class="col-md-12">
         <div id="videos">
-
-        </div>
-        <div id="channelInfo">
 
         </div>
       </div>
