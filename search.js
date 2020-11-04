@@ -12,7 +12,7 @@ $(document).ready(function(){
 
 
     console.log("search.clicked ==> " + search)
-    videoLists(API_KEY, search, 10, "");
+    videoLists(API_KEY, search, 5, "");
   })
   
   $("#channelInfo").submit(function(event){
@@ -23,7 +23,7 @@ $(document).ready(function(){
     var nextPageToken = $("#nextPageToken").val();
 
     //console.log(nextPageToken)
-    videoLists(API_KEY, search, 10, nextPageToken);
+    videoLists(API_KEY, search, 5, nextPageToken);
   })
 
   $("#videoInfo").submit(function(event){
@@ -35,7 +35,7 @@ $(document).ready(function(){
 
     console.log("detail-info.clicked ==>" + videoId)
 
-    videoDetails(API_KEY, videoId, 10, "");
+    videoDetails(API_KEY, videoId, 0);
   })
 
   function videoLists(key, search, maxResults, nextPageToken){
@@ -54,7 +54,8 @@ $(document).ready(function(){
 
       $("#totalResults").append("totalResults : " + data.pageInfo.totalResults)
 
-      data.items.forEach(item => {
+      data.items.forEach(function(item, index, data) {
+        console.log(data[index])
         
         video = `
           <iframe src="https://www.youtube.com/embed/${item.id.videoId}" height="315" width="420" frameboarder="0" allowfullscreen></iframe>
@@ -63,29 +64,39 @@ $(document).ready(function(){
           <h6>ㅁ 제목 : ${item.snippet.title}</h6>
           <h6>ㅁ Desc. : ${item.snippet.description}</h6>
           <h6>ㅁ 게시일시 : ${item.snippet.publishedAt}</h6> 
-          <h6>ㅁ tags : ${item.snippet.tags}</h6> 
-          <input type="text" class="form-control" id="videoId">${item.id.videoId}
+          <input type="text" class="form-control" id="videoId"><h6> ㅁ ${index} : ${data[index].id.videoId}</h6>
           <input type="submit" class="btn btn-primary" value="detail-info">
+          <div id="details"></div>
+          
         `
+        videoDetails(API_KEY, data[index].id.videoId);
 
+        //$("#videoId").append(item.id.videoId);
         $("#videos").append(video);
-
-        //document.getElementById("videoId").value = ${item.id.videoId};
+        
+        //document.getElementById("details").value = data[index].id.videoId;
       });
     })
   }
 
-  function videoDetails(key, videoId, maxResults, pageToken){
-      
+  function videoDetails(key, videoId){
+    console.log("called videoDetails !!!!")  
     $("#details").empty()
 
     $.get("https://www.googleapis.com/youtube/v3/videos?id="+videoId + "&key="+key
-    + "&part=contentDetails,statistics,status", function(detail){
-      console.log(detail)
+    + "&part=snippet,contentDetails,statistics,status", function(detail){
+      
 
       //$("#details").append("totalResults : " + detail.snippet.tags[])
-      $("#details").append("contentDetails : " + detail);
-       
+      detail.items.forEach(function(item, index, det) {
+        console.log(det[index])
+
+        $("#details").append("<br>contentDetails.duration : " + det[index].contentDetails.duration);
+        $("#details").append("<br>statistics.viewCount : " + det[index].statistics.viewCount);
+        $("#details").append("<br>statistics.commentCount : " + det[index].statistics.commentCount);
+        $("#details").append("<br>statistics.favoriteCount : " + det[index].statistics.favoriteCount);
+        $("#details").append("<br>snippet.tags : " + det[index].snippet.tags);
+        
     });
   }
 })
