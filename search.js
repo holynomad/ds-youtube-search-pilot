@@ -69,11 +69,14 @@ $(document).ready(function(){
           <div id="details"></div>
           
         `
-        videoDetails(API_KEY, data[index].id.videoId);
+        //videoDetails(API_KEY, data[index].id.videoId);
 
+        //$("details").append(videoDetails(API_KEY, data[index].id.videoId))
         //$("#videoId").append(item.id.videoId);
         $("#videos").append(video);
         
+        //document.getElementsByName('details')[0] = data[index].id.videoId;
+
         //document.getElementById("details").value = data[index].id.videoId;
       });
     })
@@ -97,6 +100,7 @@ $(document).ready(function(){
         $("#details").append("<br>statistics.favoriteCount : " + det[index].statistics.favoriteCount);
         $("#details").append("<br>snippet.tags : " + det[index].snippet.tags);
         
-    });
+      })    
+    })
   }
 })
