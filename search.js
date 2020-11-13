@@ -43,6 +43,7 @@ $(document).ready(function(){
     //$("#nextPageToken").empty()
     $("#totalResults").empty()
     $("#videos").empty()
+    $("#details").empty()
 
     $.get("https://www.googleapis.com/youtube/v3/search?key="+key
     + "&type=video&part=snippet&maxResults="+maxResults+ "&q="+search+"&pageToken="+nextPageToken, function(data){
@@ -64,12 +65,14 @@ $(document).ready(function(){
           <h6>ㅁ 제목 : ${item.snippet.title}</h6>
           <h6>ㅁ Desc. : ${item.snippet.description}</h6>
           <h6>ㅁ 게시일시 : ${item.snippet.publishedAt}</h6> 
-          <input type="text" class="form-control" id="videoId"><h6> ㅁ ${index} : ${data[index].id.videoId}</h6>
+          <input type="text" class="form-control" id="videoId"><h6> ㅁ ${index} : ${item.id.videoId}</h6>
           <input type="submit" class="btn btn-primary" value="detail-info">
           <div id="details"></div>
           
         `
         //videoDetails(API_KEY, data[index].id.videoId);
+
+        video_id = item.id.videoId
 
         //$("details").append(videoDetails(API_KEY, data[index].id.videoId))
         //$("#videoId").append(item.id.videoId);
@@ -78,29 +81,36 @@ $(document).ready(function(){
         //document.getElementsByName('details')[0] = data[index].id.videoId;
 
         //document.getElementById("details").value = data[index].id.videoId;
+
+        $.get("https://www.googleapis.com/youtube/v3/videos?id="+item.id.videoId + "&key="+key
+        + "&part=snippet,contentDetails,statistics,status", function(detail){
+          
+
+          //$("#details").append("totalResults : " + detail.snippet.tags[])
+          
+          detail.items.forEach(function(item, index_2, det) {
+            console.log(det[index_2])
+
+            if (index == index_2) {
+              $("#details").append("<br>contentDetails.duration : " + det[index_2].contentDetails.duration);
+              $("#details").append("<br>statistics.viewCount : " + det[index_2].statistics.viewCount);
+              $("#details").append("<br>statistics.commentCount : " + det[index_2].statistics.commentCount);
+              $("#details").append("<br>statistics.favoriteCount : " + det[index_2].statistics.favoriteCount);
+              $("#details").append("<br>snippet.tags : " + det[index_2].snippet.tags);
+            }
+          })    
+        })
+
       });
     })
+
+
   }
 
   function videoDetails(key, videoId){
     console.log("called videoDetails !!!!")  
-    $("#details").empty()
+    
 
-    $.get("https://www.googleapis.com/youtube/v3/videos?id="+videoId + "&key="+key
-    + "&part=snippet,contentDetails,statistics,status", function(detail){
-      
-
-      //$("#details").append("totalResults : " + detail.snippet.tags[])
-      detail.items.forEach(function(item, index, det) {
-        console.log(det[index])
-
-        $("#details").append("<br>contentDetails.duration : " + det[index].contentDetails.duration);
-        $("#details").append("<br>statistics.viewCount : " + det[index].statistics.viewCount);
-        $("#details").append("<br>statistics.commentCount : " + det[index].statistics.commentCount);
-        $("#details").append("<br>statistics.favoriteCount : " + det[index].statistics.favoriteCount);
-        $("#details").append("<br>snippet.tags : " + det[index].snippet.tags);
-        
-      })    
-    })
+    
   }
 })
