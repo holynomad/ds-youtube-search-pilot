@@ -1,17 +1,15 @@
 $(document).ready(function(){
   var API_KEY = ""
   var video = ""
-  //var nextPageToken = ""
   var videos = $("#videos")
 
   $("#form").submit(function(event){
     event.preventDefault();
-    //alert("form is submitted");
  
     var search = $("#search").val();
 
-
     console.log("search.clicked ==> " + search)
+
     videoLists(API_KEY, search, 5, "");
   })
   
@@ -28,14 +26,13 @@ $(document).ready(function(){
 
   $("#videoInfo").submit(function(event){
     event.preventDefault();
-    //alert("form is submitted");
  
     var videoId = $("#videoId").val();
     //var nextPageToken = $("#nextPageToken").val();
 
     console.log("detail-info.clicked ==>" + videoId)
 
-    videoDetails(API_KEY, videoId, 0);
+    videoDetails(API_KEY, videoId, channelId, videoinfo);
   })
 
   function videoLists(key, search, maxResults, nextPageToken){
@@ -43,10 +40,11 @@ $(document).ready(function(){
     //$("#nextPageToken").empty()
     $("#totalResults").empty()
     $("#videos").empty()
-    $("#details").empty()
+    $("#contents").empty()
 
     $.get("https://www.googleapis.com/youtube/v3/search?key="+key
     + "&type=video&part=snippet&maxResults="+maxResults+ "&q="+search+"&pageToken="+nextPageToken, function(data){
+      console.log('1')
       console.log(data)
 
       //$("#nextPageToken").append(data.nextPageToken)
@@ -56,6 +54,7 @@ $(document).ready(function(){
       $("#totalResults").append("totalResults : " + data.pageInfo.totalResults)
 
       data.items.forEach(function(item, index, data) {
+        console.log('2-1', index)
         console.log(data[index])
         
         video = `
@@ -65,41 +64,51 @@ $(document).ready(function(){
           <h6>ㅁ 제목 : ${item.snippet.title}</h6>
           <h6>ㅁ Desc. : ${item.snippet.description}</h6>
           <h6>ㅁ 게시일시 : ${item.snippet.publishedAt}</h6> 
-          <input type="text" class="form-control" id="videoId"><h6> ㅁ ${index} : ${item.id.videoId}</h6>
-          <input type="submit" class="btn btn-primary" value="detail-info">
-          <div id="details"></div>
-          
+          <h6> ㅁ ${index} : ${item.id.videoId}</h6>          
         `
-        //videoDetails(API_KEY, data[index].id.videoId);
+        
 
-        video_id = item.id.videoId
+        //video_id = item.id.videoId
 
         //$("details").append(videoDetails(API_KEY, data[index].id.videoId))
         //$("#videoId").append(item.id.videoId);
-        $("#videos").append(video);
+        
+        // videoDetails로 일원화 주석 @ 2020.11.14.
+        //$("#videos").append(video);
+
+        //console.log('2-2', data[index].id.videoId, data[index].snippet.channelId, video)
+
+        videoDetails(API_KEY, data[index].id.videoId, data[index].snippet.channelId, video);
         
         //document.getElementsByName('details')[0] = data[index].id.videoId;
 
         //document.getElementById("details").value = data[index].id.videoId;
 
-        $.get("https://www.googleapis.com/youtube/v3/videos?id="+item.id.videoId + "&key="+key
-        + "&part=snippet,contentDetails,statistics,status", function(detail){
+        //$.get("https://www.googleapis.com/youtube/v3/videos?id="+item.id.videoId + "&key="+key
+        //+ "&part=snippet,contentDetails,statistics,status", function(detail){
           
 
           //$("#details").append("totalResults : " + detail.snippet.tags[])
           
-          detail.items.forEach(function(item, index_2, det) {
-            console.log(det[index_2])
+        //  detail.items.forEach(function(item, index_2, det) {
+        //    console.log('3-1', index_2)
+        //    console.log(det[index_2])
 
-            if (index == index_2) {
-              $("#details").append("<br>contentDetails.duration : " + det[index_2].contentDetails.duration);
-              $("#details").append("<br>statistics.viewCount : " + det[index_2].statistics.viewCount);
-              $("#details").append("<br>statistics.commentCount : " + det[index_2].statistics.commentCount);
-              $("#details").append("<br>statistics.favoriteCount : " + det[index_2].statistics.favoriteCount);
-              $("#details").append("<br>snippet.tags : " + det[index_2].snippet.tags);
-            }
-          })    
-        })
+        //    if (index == index_2 && snippet.channelId == item.snippet.channelId) {
+        //      alert(det[index_2].contentDetails.duration)
+              
+              
+              //$("#contents").append("<br>contentDetails.duration : " + det[index_2].contentDetails.duration);
+              //$("#contents").append("<br>statistics.viewCount : " + det[index_2].statistics.viewCount);
+              //$("#contents").append("<br>statistics.commentCount : " + det[index_2].statistics.commentCount);
+              //$("#contents").append("<br>statistics.favoriteCount : " + det[index_2].statistics.favoriteCount);
+              //$("#contents").append("<br>snippet.tags : " + det[index_2].snippet.tags);
+        //    }
+        //  })    
+          
+        //  $("#contents").append(details);
+
+        //})
 
       });
     })
@@ -107,10 +116,49 @@ $(document).ready(function(){
 
   }
 
-  function videoDetails(key, videoId){
-    console.log("called videoDetails !!!!")  
-    
+  function videoDetails(key, videoId, channelId, videoinfo){
+    console.log("called videoDetails") // --> ", videoId, channelId)  
 
-    
+    $("#contents").empty()
+
+
+
+    $.get("https://www.googleapis.com/youtube/v3/videos?id="+videoId + "&key="+key
+    + "&part=snippet,contentDetails,statistics,status", function(detail){
+      console.log("called getting videoDetails")  
+
+      //$("#details").append("totalResults : " + detail.snippet.tags[])
+      detail.items.forEach(function(item, index, det) {
+        console.log('3-2', index, channelId)
+
+        if (channelId == det[index].snippet.channelId) {
+          video = videoinfo + `
+            <h6> ㅁ 재생시간 : ${det[index].contentDetails.duration} </h6>
+            <h6> ㅁ 조회수 : ${det[index].statistics.viewCount} </h6>
+            <h6> ㅁ 댓글수 : ${det[index].statistics.commentCount} </h6>
+            <h6> ㅁ Tags : ${det[index].snippet.tags} </h6>
+          `
+
+          $("#videos").append(video);
+
+
+          //console.log(det[index].contentDetails.duration)
+          //console.log(det[index].statistics.viewCount)
+          //console.log(det[index].statistics.commentCount)
+          //console.log(det[index].snippet.tags)
+
+        }
+
+        
+
+        //$("#contents").append("<br>contentDetails.duration : " + det[index].contentDetails.duration);
+        //$("#contents").append("<br>statistics.viewCount : " + det[index].statistics.viewCount);
+        //$("#contents").append("<br>statistics.commentCount : " + det[index].statistics.commentCount);
+        //$("#contents").append("<br>statistics.favoriteCount : " + det[index].statistics.favoriteCount);
+        //$("#contents").append("<br>snippet.tags : " + det[index].snippet.tags);
+
+      })    
+    })
   }
+
 })
