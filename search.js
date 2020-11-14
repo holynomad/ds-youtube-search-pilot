@@ -35,6 +35,34 @@ $(document).ready(function(){
     videoDetails(API_KEY, videoId, channelId, videoinfo);
   })
 
+  // add "export" button for CSV download @ 2020.11.15.
+  $("#printOut").submit(function(event){
+    event.preventDefault();
+ 
+    // var jb = $( 'h1' ).html();
+    var contents = $('#videos').html();
+    
+    //var splitCont = contents.split(' ')
+    //alert(splitCont)
+    
+    //console.log(Array.isArray(splitCont))
+    //console.log("printOut --> ",splitCont)
+
+    let csvContent = "data:text/csv;charset=utf-8,";
+    
+    /*
+    contents.forEach(function(rowArray) {
+        let row = rowArray.join(",");
+        csvContent += row + "\r\n";
+    });
+    */
+
+    csvContent += contents;
+    
+    var encodedUri = encodeURI(csvContent);
+    window.open(encodedUri);
+  })
+
   function videoLists(key, search, maxResults, nextPageToken){
 
     //$("#nextPageToken").empty()
@@ -64,15 +92,20 @@ $(document).ready(function(){
           <h6>ㅁ 제목 : ${item.snippet.title}</h6>
           <h6>ㅁ Desc. : ${item.snippet.description}</h6>
           <h6>ㅁ 게시일시 : ${item.snippet.publishedAt}</h6> 
-          <h6> ㅁ ${index} : ${item.id.videoId}</h6>          
         `
+
+        // test
+        /*
+        videoString = `
+          "https://www.youtube.com/embed/${item.id.videoId}, ${item.snippet.channelId}, ${item.snippet.channelTitle}"
+        ` 
+        */       
+
+        
+        //console.log(Array.isArray(videoString))
+        //console.log(videoString)
         
 
-        //video_id = item.id.videoId
-
-        //$("details").append(videoDetails(API_KEY, data[index].id.videoId))
-        //$("#videoId").append(item.id.videoId);
-        
         // videoDetails로 일원화 주석 @ 2020.11.14.
         //$("#videos").append(video);
 
@@ -132,14 +165,26 @@ $(document).ready(function(){
         console.log('3-2', index, channelId)
 
         if (channelId == det[index].snippet.channelId) {
-          video = videoinfo + `
+          
+          videoDetail = videoinfo + `
             <h6> ㅁ 재생시간 : ${det[index].contentDetails.duration} </h6>
             <h6> ㅁ 조회수 : ${det[index].statistics.viewCount} </h6>
             <h6> ㅁ 댓글수 : ${det[index].statistics.commentCount} </h6>
             <h6> ㅁ Tags : ${det[index].snippet.tags} </h6>
           `
+          
 
-          $("#videos").append(video);
+          // test
+          /*
+          videoDetail = videoinfo.split(',')
+          console.log(Array.isArray(videoDetail))
+          console.log(videoDetail)
+          */
+
+          // 구독자수는 channels api 통해 추가작업 필요
+          //<h6> ㅁ 구독자수 : ${det[index].statistics.subscriberCount} </h6>
+
+          $("#videos").append(videoDetail);
 
 
           //console.log(det[index].contentDetails.duration)
@@ -148,8 +193,6 @@ $(document).ready(function(){
           //console.log(det[index].snippet.tags)
 
         }
-
-        
 
         //$("#contents").append("<br>contentDetails.duration : " + det[index].contentDetails.duration);
         //$("#contents").append("<br>statistics.viewCount : " + det[index].statistics.viewCount);
