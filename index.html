@@ -8,10 +8,9 @@
   <body>
     <div class="container">
       <br>
-      <h1>다샤 Youtube Search (B/O Pilot ver1.6.2)</h1>
+      <h1>다샤 Youtube Search (B/O Pilot ver1.6.3)</h1>
       <br>
-      <h3>- 키워드 검색시, 개별 콘텐츠별 상세정보(재생시간/조회수 등) 자동조회 후, Table 형식으로 표기</h3>
-      <h3>- export 버튼 추가(검색결과 CSV파일 추출, 기능업뎃중)</h3>
+      <h3>- 테이블 속성 개선 (고정 height & auto-scroll)</h3>
       <br>
       <form id="form">
         <div class="form-group">
@@ -50,7 +49,7 @@
       <form id="videoInfo">
         <!--<div class="row">-->
           <!--<div class="col-md-12">-->
-            <table id="links" border="1">
+            <table id="links" border="2">
               <head>
                 <style>
                   table {
@@ -60,10 +59,17 @@
                   table th,
                   table td {
                     padding: 5px;
+                    overflow: scroll;
                     max-width: 430px;
-                    min-width: 430px;
+                    min-width: 120px;
+                    max-height: 320px;
                     text-align: center;
                     background-color: blanchedalmond;
+                  }
+                  .wapper {
+                    overflow: scroll;
+                    height: 207px;
+                    width: 207px
                   }
                   .box {
                     width: 150px;
@@ -84,19 +90,19 @@
                     overflow: auto;
                   }
                 </style>
+                <tr>
+                  <td>Link</td>
+                  <td class="wapper">Channel Id</td>
+                  <td class="wapper">Channel</td>
+                  <td>Title</td>
+                  <td>Desc.</td>
+                  <td class="wapper">PublishAt</td>
+                  <td class="wapper">Time</td>
+                  <td class="wapper">ViewCnt</td>
+                  <td class="wapper">CommentCnt</td>
+                  <td class="sc">Tags</td>
+                </tr>
               </head>
-              <tr>
-                <td>Link</td>
-                <td>Channel Id</td>
-                <td>Channel</td>
-                <td>Title</td>
-                <td>Desc.</td>
-                <td>PublishAt</td>
-                <td>Time</td>
-                <td>ViewCnt</td>
-                <td>CommentCnt</td>
-                <td>Tags</td>
-              </tr>
               <tbody id="videos">
                 
               </tbody>
