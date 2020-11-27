@@ -144,7 +144,7 @@ $(document).ready(function(){
                 <h6>${det[index].statistics.commentCount} </h6>
               </td>
               <td>
-                <h6>${det[index].snippet.tags} </h6>
+                <h6 style="height: 320px; overflow: auto">${det[index].snippet.tags} </h6>
               </td>
             </tr>
           `

@@ -47,65 +47,44 @@
     <br>
     <div class="container">
       <form id="videoInfo">
+        
+
         <!--<div class="row">-->
           <!--<div class="col-md-12">-->
             <table id="links" border="2">
+              <style>
+                table {
+                  table-layout: fixed;
+                  border-collapse: collapse;
+                }
+
+                table th, 
+                table td {
+                  padding: 5px;
+                  max-width: 440px;
+                  mix-width: 80px;
+                  text-align: center;
+                  background-color: blanchedalmond;
+                }
+              </style>
               <head>
-                <style>
-                  table {
-                    table-layout: fixed;
-                    border-collapse: collapse;
-                  }
-                  table th,
-                  table td {
-                    padding: 5px;
-                    overflow: scroll;
-                    max-width: 430px;
-                    min-width: 120px;
-                    max-height: 320px;
-                    text-align: center;
-                    background-color: blanchedalmond;
-                  }
-                  .wapper {
-                    overflow: scroll;
-                    height: 207px;
-                    width: 207px
-                  }
-                  .box {
-                    width: 150px;
-                    height: 150px;
-                    background-color: #cccccc;
-                    float: left;
-                    margin-right: 10px;}
-                  .vi {
-                    overflow: visible;
-                  }
-                  .hi {
-                    overflow: hidden;
-                  }
-                  .sc {
-                    overflow: scroll;
-                  }
-                  .au {
-                    overflow: auto;
-                  }
-                </style>
                 <tr>
                   <td>Link</td>
-                  <td class="wapper">Channel Id</td>
-                  <td class="wapper">Channel</td>
+                  <td>Channel Id</td>
+                  <td>Channel</td>
                   <td>Title</td>
                   <td>Desc.</td>
-                  <td class="wapper">PublishAt</td>
-                  <td class="wapper">Time</td>
-                  <td class="wapper">ViewCnt</td>
-                  <td class="wapper">CommentCnt</td>
-                  <td class="sc">Tags</td>
+                  <td>PublishAt</td>
+                  <td>Time</td>
+                  <td>ViewCnt</td>
+                  <td>CommentCnt</td>
+                  <td>Tags</td>
                 </tr>
               </head>
               <tbody id="videos">
                 
               </tbody>
+              
             </table>
           <!--</div>-->
         <!--</div>-->
