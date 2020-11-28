@@ -36,7 +36,8 @@ $(document).ready(function(){
   })
 
   // add "export" button for CSV download @ 2020.11.15.
-  $("#printOut").submit(function(event){
+  // export 버튼 내부 onClick 이벤트 추가에 따라 아래 미적용위해 22222 추가 @ 2020.11.28.
+  $("#printOut222222").submit(function(event){
     event.preventDefault();
  
     // var jb = $( 'h1' ).html();

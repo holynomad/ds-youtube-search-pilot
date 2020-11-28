@@ -4,13 +4,17 @@
   <head>
     <title>ds-youtube-search pilot</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Table 형식 CSV export 스크립트 추가 @ 2020.11.28. : 출처: https://extbrain.tistory.com/115 -->
+    <script src="table2csv.js"></script>
   </head>
   <body>
     <div class="container">
       <br>
-      <h1>다샤 Youtube Search (B/O Pilot ver1.6.3)</h1>
+      <h1>다샤 Youtube Search (B/O Pilot ver1.6.4)</h1>
       <br>
-      <h3>- 테이블 속성 개선 (고정 height & auto-scroll)</h3>
+      <h3>- table2csv.js 추가</h3>
+      <h3>- 크롤링 데이터 테이블 형식으로 CSV export 개선</h3>
+      <h3>- pattern 추출로 특정 html 태그제거</h3>
       <br>
       <form id="form">
         <div class="form-group">
@@ -23,7 +27,13 @@
     </div>
     <div class="container">
       <form id="printOut">
-        <input type="submit" class="btn btn-secondary" value="export"> <!-- export to CSV file-->
+        <!-- export to CSV file : export.js 추가하면서 아래 주석 @ 2020.11.28.-->
+        <!--<input type="submit" class="btn btn-secondary" value="export">--> 
+        <input type="submit" onclick="exportTableToCsv('links', 'ds-yt-csv-yyyymmdd')" class="btn btn-secondary" value="export">
+        <!--<button type="button" onclick="exportTableToCsv('links', 'ds-yt-csv-yyyymmdd')">
+          Export
+        </button>
+        -->
       </form>
     </div>
   
@@ -52,6 +62,7 @@
         <!--<div class="row">-->
           <!--<div class="col-md-12">-->
             <table id="links" border="2">
+              <!-- 아래 CSS 참조 : http://jsfiddle.net/3rtfcy10/5/ -->
               <style>
                 table {
                   table-layout: fixed;
