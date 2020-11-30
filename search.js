@@ -90,8 +90,11 @@ $(document).ready(function(){
         // 참조 : https://blog.naver.com/neo_start/220322362255
         video = `
             <tr>
-              <td>
+              <td id='myiframe'>
                 <iframe src="https://www.youtube.com/embed/${item.id.videoId}" height="315" width="420" frameboarder="0" allowfullscreen></iframe>
+              </td>
+              <td>
+                <h6>${item.id.videoId}</h6>
               </td>
               <td>
                 <h6>${item.snippet.channelId}</h6>

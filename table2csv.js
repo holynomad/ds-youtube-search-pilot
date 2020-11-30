@@ -8,20 +8,25 @@ function removeTag( str ) {
   if (str.indexOf('iframe') > -1) {
     
     // 아래 iframe 필터링 테스트 중....일단 주석 !
-    //alert(str + "--> iframe exists!")
-
-    //var pattern = /\[embed\](.*?)\[\/embed\]|<iframe.*?src="(.*?)".*?<\/iframe>/;
-    //alert(pattern)
-    //var match = pattern.exec(str);
+    
+    //let match = data.match(/\embed\/([0-9]+)\//i);
+    //let result = match[1];
+    
     //alert(match)
     //var url = match[1];
     //alert(url)
-    pattern = /<iframe.*?src="(.*?)".*?<\/iframe>/;
-    alert(pattern)
-    match = pattern.exec(str)
-    var result = match[1];
     
-    return result;
+    /*
+    var pattern = /<iframe.*?src="(.*?)".*?<\/iframe>/;
+    var match = str.exec(pattern)
+    var result = match[1];
+    */
+    
+    // 출처: https://webdir.tistory.com/490 [WEBDIR]
+    //alert($('iframe').attr('src'));
+    //var vurl = $('iframe').attr('src').match(/www.youtube.com\/embed\/?([0-9]+)/i);
+
+    return str;
 
   } else {
     //alert(str + "--> is not")
