@@ -85,35 +85,58 @@ $(document).ready(function(){
       data.items.forEach(function(item, index, data) {
         console.log('2-1', index)
         console.log(data[index])
+
+        // 기존 CSV 크롤링 이력 참조여부 함수추가 @ 2020.12.08. 
+        // ref. : jQuery 이용 - https://sweetpotatocat.tistory.com/5
+        //      : d3 이용 - https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&logNo=221120158854&proxyReferer=https:%2F%2Fwww.google.com%2F
+        function checkCsvHistory(newVideoId) {
+
+          // 기존 로컬 경로 CSV 파일 읽어와서, newVideoId와 겹치는 부분 있으면 "YES", 없으면 "NO"
+          // ...
+          // ... 업뎃예정 !!
+          return "NO"; 
+           
+        }
+
+        // 기존 CSV 크롤링 이력 참조여부 check @ 2020.12.08.
+        let isExistsCsv = checkCsvHistory(data[index].id.videoId);
+
+        if (isExistsCsv == "YES") {
+          // No action for existing CSV crawling history
+        }
+        else {
+          
+          // 표 형식 추가 @ 2020.11.21
+          // 참조 : https://blog.naver.com/neo_start/220322362255
+          video = `
+                      <tr>
+                        <td id='myiframe'>
+                          <iframe src="https://www.youtube.com/embed/${item.id.videoId}" height="315" width="420" frameboarder="0" allowfullscreen></iframe>
+                        </td>
+                        <td>
+                          <h6>${item.id.videoId}</h6>
+                        </td>
+                        <td>
+                          <h6>${item.snippet.channelId}</h6>
+                        </td>
+                        <td>
+                          <h6>${item.snippet.channelTitle}</h6>
+                        </td>
+                        <td>
+                          <h6>${item.snippet.title}</h6>
+                        </td>
+                        <td>
+                          <h6>${item.snippet.description}</h6>
+                        </td>
+                        <td>
+                          <h6>${item.snippet.publishedAt}</h6>   
+                        </td>
+                    `    
+          // video 상세정보 조회 + 추가한 다음, tbody에 표 형식으로 추가
+          videoDetails(API_KEY, data[index].id.videoId, data[index].snippet.channelId, video);
+        }
         
-        // 표 형식 추가 @ 2020.11.21
-        // 참조 : https://blog.naver.com/neo_start/220322362255
-        video = `
-            <tr>
-              <td id='myiframe'>
-                <iframe src="https://www.youtube.com/embed/${item.id.videoId}" height="315" width="420" frameboarder="0" allowfullscreen></iframe>
-              </td>
-              <td>
-                <h6>${item.id.videoId}</h6>
-              </td>
-              <td>
-                <h6>${item.snippet.channelId}</h6>
-              </td>
-              <td>
-                <h6>${item.snippet.channelTitle}</h6>
-              </td>
-              <td>
-                <h6>${item.snippet.title}</h6>
-              </td>
-              <td>
-                <h6>${item.snippet.description}</h6>
-              </td>
-              <td>
-                <h6>${item.snippet.publishedAt}</h6>   
-              </td>
-        `    
-        // video 상세정보 조회 + 추가한 다음, tbody에 표 형식으로 추가
-        videoDetails(API_KEY, data[index].id.videoId, data[index].snippet.channelId, video);
+        
         
 
       });
