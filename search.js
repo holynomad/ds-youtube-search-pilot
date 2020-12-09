@@ -86,6 +86,13 @@ $(document).ready(function(){
         console.log('2-1', index)
         console.log(data[index])
 
+        $.ajax({
+            type: "GET",
+            url: "/Users/holynomad/Downloads/ds-yt-csv-yyyymmdd.csv",
+            dataType: "text",
+            success: function(data) {checkCsvHistory(data);}
+        });
+
         // 기존 CSV 크롤링 이력 참조여부 함수추가 @ 2020.12.08. 
         // ref. : jQuery 이용 - https://sweetpotatocat.tistory.com/5
         //      : d3 이용 - https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&logNo=221120158854&proxyReferer=https:%2F%2Fwww.google.com%2F
@@ -93,6 +100,9 @@ $(document).ready(function(){
 
           // 기존 로컬 경로 CSV 파일 읽어와서, newVideoId와 겹치는 부분 있으면 "YES", 없으면 "NO"
           // ...
+
+
+
           // ... 업뎃예정 !!
           return "NO"; 
            
