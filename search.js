@@ -90,17 +90,39 @@ $(document).ready(function(){
             type: "GET",
             url: "/Users/holynomad/Downloads/ds-yt-csv-yyyymmdd.csv",
             dataType: "text",
-            success: function(data) {checkCsvHistory(data);}
+            success: function(csvText) {checkCsvHistory(csvText, data[index].id.videoId);}
         });
+
+        console.log('3-1 : start parsing csv')
 
         // 기존 CSV 크롤링 이력 참조여부 함수추가 @ 2020.12.08. 
         // ref. : jQuery 이용 - https://sweetpotatocat.tistory.com/5
         //      : d3 이용 - https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&logNo=221120158854&proxyReferer=https:%2F%2Fwww.google.com%2F
-        function checkCsvHistory(newVideoId) {
+        function checkCsvHistory(csvList, newVideoId) {
 
           // 기존 로컬 경로 CSV 파일 읽어와서, newVideoId와 겹치는 부분 있으면 "YES", 없으면 "NO"
           // ...
+          var allTextLines = csvList.split(/\r\n|\n/);
+          var headers = allTextLines[0].split(',');
+          var lines = [];
 
+          console.log('3-2 : csvList, newVideoId, headers - ', csvList, newVideoId, headers)
+
+          for (var i=1; i<allTextLines.length; i++) {
+              var data = allTextLines[i].split(',');
+
+              console.log('3-3 : data - ', data)
+              if (data.length == headers.length) {
+
+                  var tarr = [];
+                  for (var j=0; j<headers.length; j++) {
+                      tarr.push(headers[j]+":"+data[j]);
+                      console.log('3-4 : data[j] - ', data[j])
+                  }
+                  lines.push(tarr);
+              }
+          }
+          
 
 
           // ... 업뎃예정 !!
@@ -182,6 +204,14 @@ $(document).ready(function(){
               </td>
               <td>
                 <h6 style="height: 320px; overflow: auto">${det[index].snippet.tags} </h6>
+              </td>
+              <td>
+                <select>
+                  <option disabled="disabled" selected="selected"></option>
+                  <option value="1">Accept</option>
+                  <option value="2">Review</option>
+                  <option value="3">Reject</option>
+                </select>
               </td>
             </tr>
           `
