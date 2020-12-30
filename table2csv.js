@@ -28,6 +28,10 @@ function removeTag( str ) {
 
     return str;
 
+  } else if (str.indexOf('select') > -1) { // 제일 마지막 labelling 컬럼인 경우 분기 @ 2020.12.30 
+    // https://jsfiddle.net/bLa8pn74/ 코드 참조 및 jQuery 활용한 영역 추가할 것 !!
+    return str.find('option:selected').text();
+  
   } else {
     //alert(str + "--> is not")
     // 그 외 태그(h6 등)인 경우, 내가 지정한 특정 html 태그만 제거 : https://webisfree.com/2015-12-22/[%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8]-%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%ED%83%9C%EA%B7%B8%EB%A7%8C-%EC%A0%9C%EA%B1%B0%ED%95%98%EA%B8%B0
