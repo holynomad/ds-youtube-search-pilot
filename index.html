@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Table 형식 CSV export 스크립트 추가 @ 2020.11.28. : 출처: https://extbrain.tistory.com/115 -->
     <script src="table2csv.js"></script>
+    
   </head>
   <body>
     <div class="container">
@@ -37,7 +38,7 @@
         <!--<input type="submit" class="btn btn-secondary" value="export">--> 
         <input type="submit" onclick="exportTableToCsv('links', 'ds-yt-csv-yyyymmdd')" class="btn btn-secondary" value="export">
         <!-- export to CSV using jQuery 3.3.1 + JS @ 2021.01.01 -->
-        <input type="button" value="Import" class="btn btn-info" id="import">
+        <input type="button" value="export2" class="btn btn-info" id="export">
         <!--<button type="button" onclick="exportTableToCsv('links', 'ds-yt-csv-yyyymmdd')">
           Export
         </button>
@@ -115,6 +116,9 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <!--<script src="papaparse.min.js"></script>-->
+  <!-- CSV export JS 하나 더 추가 (ft. filtered drop-down list) -->
+  <script src="export2csv.mjs"></script>
+  
   <script src="search.js"></script>
 
 </html>
