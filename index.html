@@ -13,7 +13,7 @@
       <h1>다샤 Youtube Search (B/O Pilot ver1.6.7)</h1>
       <br>
       <h3>- Label 컬럼 추가후 콘텐츠 사용여부 라벨링(Accept/Review/Reject) 표기</h3>
-      <h3>- CSV 변환시 라벨링 태그제거 후, value만 표기</h3>
+      <h3>- CSV 변환시 라벨링 태그제거 후, value만 변환적용</h3>
       <!--
       <h3>- 로컬경로 crawling.csv 읽어서 기등록 항목은 화면에.c 띄우지 않는 기능 추가</h3>
       <h3>- using d3.js : https://stackoverflowom/questions/28136410/reading-columns-in-their-order-of-the-csv-file</h3>
@@ -36,6 +36,8 @@
         <!-- export to CSV file : export.js 추가하면서 아래 주석 @ 2020.11.28.-->
         <!--<input type="submit" class="btn btn-secondary" value="export">--> 
         <input type="submit" onclick="exportTableToCsv('links', 'ds-yt-csv-yyyymmdd')" class="btn btn-secondary" value="export">
+        <!-- export to CSV using jQuery 3.3.1 + JS @ 2021.01.01 -->
+        <input type="button" value="Import" class="btn btn-info" id="import">
         <!--<button type="button" onclick="exportTableToCsv('links', 'ds-yt-csv-yyyymmdd')">
           Export
         </button>
