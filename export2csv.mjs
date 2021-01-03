@@ -81,21 +81,6 @@ $.fn.extend({
 })(jQuery);
 
 
-$(function(){
-var firstDDM = ['aaa','bbb','ccc','ddd'];
-var firstshortcut = ['a','b','c','d'];
-var option = "",
- select = "";
-for(var i=0; i<firstDDM.length;i++){
-option += '<option value="'+ firstshortcut[i] + '">' + firstDDM[i] + '</option>';
-}
-select = '<select class="firstDDM" type="firstDDM">' + option + '</select>';
-
-$("tr").each(function() {
-       $(this).find("td:eq(3)").append(select);
-   });
-});
-
 
 
 
