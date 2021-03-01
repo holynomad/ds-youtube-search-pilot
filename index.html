@@ -11,9 +11,8 @@
   <body>
     <div class="container">
       <br>
-      <h1>다샤 Youtube Search & Crawling (B/O ver1.6.8)</h1>
+      <h1>다샤 Youtube Search & Crawler (B/O ver1.6.9)</h1>
       <br>
-      <h3> - 상단 </h3>
       <!--
       <h3>- 로컬경로 crawling.csv 읽어서 기등록 항목은 화면에.c 띄우지 않는 기능 추가</h3>
       <h3>- using d3.js : https://stackoverflowom/questions/28136410/reading-columns-in-their-order-of-the-csv-file</h3>
@@ -21,29 +20,30 @@
       <h3>- papaparse 연동검토 : https://www.joyofdata.de/blog/parsing-local-csv-file-with-javascript-papa-parse/</h3>
       <h3>- on-going 중...어렵네 쩝</h3>
       -->
-      <br>
+      
       <form id="form">
         <div class="form-group">
           <input type="text" class="form-control" id="search">
         </div>
-        <div class="form-group">
-          <input type="submit" class="btn btn-danger" value="search">
-        </div>       
+        <!--<div class="form-group">-->
+          <input type="submit" class="btn btn-danger" value="검색">
+        <!--</div>       -->
+          <input type="button" value="CSV변환" class="btn btn-info" id="export">
       </form>
     </div>
-    <div class="container">
+    <!--<div class="container">-->
       <form id="printOut">
         <!-- export to CSV file : export.js 추가하면서 아래 주석 @ 2020.11.28.-->
         <!--<input type="submit" class="btn btn-secondary" value="export">--> 
         <!--<input type="submit" onclick="exportTableToCsv('links', 'ds-yt-csv-yyyymmdd')" class="btn btn-secondary" value="export">-->
         <!-- export to CSV using jQuery 3.3.1 + JS @ 2021.01.01 -->
-        <input type="button" value="export2" class="btn btn-info" id="export">
+        <!--<input type="button" value="CSV변환" class="btn btn-info" id="export">-->
         <!--<button type="button" onclick="exportTableToCsv('links', 'ds-yt-csv-yyyymmdd')">
           Export
         </button>
         -->
       </form>
-    </div>
+    <!--</div>-->
   
     <div class="container">
       <form id="channelInfo">
@@ -58,7 +58,7 @@
           <input type="text" class="form-control" id="nextPageToken">
         </div>
         <div class="form-group">
-          <input type="submit" class="btn btn-danger" value="next-page">
+          <input type="submit" class="btn btn-danger" value="다음페이지">
         </div>
       </form>
     </div>
