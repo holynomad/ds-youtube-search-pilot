@@ -13,10 +13,10 @@
   <body>
     <div class="container">
       <br>
-      <h1>다샤 Youtube Search & Crawler (B/O ver1.6.9)</h1>
+      <h1>다샤 Youtube Search & Crawler (B/O ver1.7.0)</h1>
       <br>
+      <h3>- 검색키워드 및 다샤태그 입력란 추가</h3>
       <!--
-      <h3>- 로컬경로 crawling.csv 읽어서 기등록 항목은 화면에.c 띄우지 않는 기능 추가</h3>
       <h3>- using d3.js : https://stackoverflowom/questions/28136410/reading-columns-in-their-order-of-the-csv-file</h3>
       <h3>- https://stackoverflow.com/questions/7431268/how-to-read-data-from-csv-file-using-javascript</h3>
       <h3>- papaparse 연동검토 : https://www.joyofdata.de/blog/parsing-local-csv-file-with-javascript-papa-parse/</h3>
@@ -85,7 +85,7 @@
                   max-width: 440px;
                   mix-width: 80px;
                   text-align: center;
-                  background-color: blanchedalmond;
+                  background-color: rgb(205, 231, 255);
                 }
               </style>
               <head>
@@ -101,6 +101,8 @@
                   <td>ViewCnt</td>
                   <td>CommentCnt</td>
                   <td>Tags</td>
+                  <td contenteditable="true">Dasha Tags</td>  <!-- add property contenteditable @ 2021.03.16. -->
+                  <td contenteditable="true">Keywords</td>    <!-- add property contenteditable @ 2021.03.16. -->
                   <td>Label</td> <!-- labelling 컬럼 추가 @ 2020.12.28 -->
                 </tr>
               </head>

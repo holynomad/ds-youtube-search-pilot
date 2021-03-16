@@ -1,5 +1,6 @@
 $(document).ready(function(){
-  var API_KEY = ""
+  var API_KEY = "AIzaSyAO0Ka2xeQ4Y2KcY465Nc1DGmCl9nzH2ic"
+  var MAX_SEARCH_COUNTS = 10
   var video = ""
   var videos = $("#videos")
 
@@ -10,7 +11,7 @@ $(document).ready(function(){
 
     console.log("search.clicked ==> " + search)
 
-    videoLists(API_KEY, search, 5, "");
+    videoLists(API_KEY, search, MAX_SEARCH_COUNTS, "");
   })
   
   $("#channelInfo").submit(function(event){
@@ -21,7 +22,7 @@ $(document).ready(function(){
     var nextPageToken = $("#nextPageToken").val();
 
     //console.log(nextPageToken)
-    videoLists(API_KEY, search, 5, nextPageToken);
+    videoLists(API_KEY, search, MAX_SEARCH_COUNTS, nextPageToken);
   })
 
   $("#videoInfo").submit(function(event){
@@ -146,26 +147,26 @@ $(document).ready(function(){
                           <iframe src="https://www.youtube.com/embed/${item.id.videoId}" height="315" width="420" frameboarder="0" allowfullscreen></iframe>
                         </td>
                         <td>
-                          <h6>${item.id.videoId}</h6>
+                          <h6 style="width: 60px; overflow: scroll">${item.id.videoId}</h6>
                         </td>
                         <td>
-                          <h6>${item.snippet.channelId}</h6>
+                          <h6 style="width: 60px; overflow: scroll">${item.snippet.channelId}</h6>
                         </td>
                         <td>
-                          <h6>${item.snippet.channelTitle}</h6>
+                          <h6 style="width: 60px">${item.snippet.channelTitle}</h6>
                         </td>
                         <td>
-                          <h6>${item.snippet.title}</h6>
+                          <h6 style="width: 120px">${item.snippet.title}</h6>
                         </td>
                         <td>
-                          <h6>${item.snippet.description}</h6>
+                          <h6 style="width: 120px; overflow: auto">${item.snippet.description}</h6>
                         </td>
                         <td>
                           <h6>${item.snippet.publishedAt}</h6>   
                         </td>
                     `    
           // video 상세정보 조회 + 추가한 다음, tbody에 표 형식으로 추가
-          videoDetails(API_KEY, data[index].id.videoId, data[index].snippet.channelId, video);
+          videoDetails(API_KEY, data[index].id.videoId, data[index].snippet.channelId, video, search);
         }
         
         
@@ -177,7 +178,7 @@ $(document).ready(function(){
 
   }
 
-  function videoDetails(key, videoId, channelId, videoinfo){
+  function videoDetails(key, videoId, channelId, videoinfo, searchKeyword){
     console.log("called videoDetails") // --> ", videoId, channelId)  
 
     $("#contents").empty()
@@ -203,7 +204,13 @@ $(document).ready(function(){
                 <h6>${det[index].statistics.commentCount} </h6>
               </td>
               <td>
-                <h6 style="height: 320px; overflow: auto">${det[index].snippet.tags} </h6>
+                <h6 style="width: 120px; overflow: auto">${det[index].snippet.tags} </h6>
+              </td>
+              <td contenteditable="true">
+              
+              </td>
+              <td>
+                <h6 style="width: 60px;">${searchKeyword}</h6>
               </td>
               <td>
                 <select>
