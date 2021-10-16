@@ -13,3 +13,8 @@ my best side-project heading for game-changer of HRD market
 javascript, html, jquery, youtube api (v3)
 
 ## Workflow
+
+## Extensions
+
+  - [파이썬 배치파일 만들기](https://greendreamtrre.tistory.com/263)
+  - [pyrunner 배치처리 & crontab 등록](https://codingmoonkwa.tistory.com/286?category=776583)
