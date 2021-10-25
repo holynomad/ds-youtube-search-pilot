@@ -22,7 +22,8 @@ const _quote_text = (text) => {
    return '"' + text + '"';
 };
 const _export = (lines, file_name) => {
-   const uri = 'data:text/csv;charset=utf-8,' + encodeURIComponent(lines.join('\n'));
+   /* CSV변환시 한글인코딩 utf-8 bom 개선위한 ,%EF%BB%BF 추가 @ 2021.10.25.*/
+   const uri = 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURIComponent(lines.join('\n'));
    const el_a = document.createElement('a');
    el_a.href = uri;
    el_a.download = file_name;
