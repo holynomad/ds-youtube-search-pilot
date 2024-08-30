@@ -10,9 +10,13 @@ my best side-project heading for game-changer of HRD market
 - career development plan by big-data 
 
 ## Stacks
-javascript, html, jquery, youtube api (v3)
+- Javascript
+- HTML
+- JQuery
+- Youtube Api (v3)
 
 ## Workflow
+- `TBD`
 
 ## Extensions
 
